@@ -1,0 +1,44 @@
+@import 'materialize.css'
+@import 'scrollbar'
+
+appear(size)
+	transform: scale(size);
+
+size-cell = 100px;
+grid-height = size-cell * 3;
+.main
+	padding 20px !important
+.grid-result
+	margin 20px 0
+	height 337px
+	scrollbar();
+	//height grid-height
+	//border 1px solid black;
+	overflow-x scroll
+	.row-g
+		padding-right 10px
+	#cocientes
+		margin-top 10px
+	#residuos
+		margin-bottom 10px
+	.cell
+		background #607D8B
+		height size-cell
+		width size-cell
+		display inline-block
+		margin -1px 0
+		text-align center
+		line-height size-cell
+		transform: scale(0);
+		transition: all .5s cubic-bezier(0.56, 0, 0.49, 1);
+		transform-origin: 0 0;
+		box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15),0px 1px 3px 0 rgba(0,0,0,0.15) !important
+		&:hover
+			box-shadow: 0 5px 11px 0 rgba(0,0,0,0.15),0px 5px 11px 0 rgba(0,0,0,0.15) !important;
+			z-index: 1;
+		&.active
+			background white
+			appear(1)
+.input-field
+	input
+		height: 2.5rem !important
