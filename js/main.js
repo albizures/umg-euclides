@@ -71,29 +71,32 @@
 		}
 		active();
 	}
-	function timeout(el,time,remove) {
+	function timeout(el,time,remove,divisor) {
 		setTimeout(function () {
 				if(remove){
 					$(el).removeClass('active');
 				}else{
+					if(divisor){
+						resultado.textContent = el.textContent;
+					}
 					$(el).addClass('active');
 				}
 		}, time);
 	}
 	function active(reverse,cb) {
-		var diff =  80,
+		var diff =  100,
 				inicio = 0;
 
-		var temp1 = reverse? $(residuosDiv).children().reverse() : $(cocientesDiv).children();
-		var temp2 = reverse? $(divisoresDiv).children().reverse() : $(divisoresDiv).children();
-		var temp3 = reverse? $(cocientesDiv).children().reverse() : $(residuosDiv).children();
+		var temp1 = /*reverse? $(residuosDiv).children().reverse() :*/ $(cocientesDiv).children();
+		var temp2 = /*reverse? $(divisoresDiv).children().reverse() :*/ $(divisoresDiv).children();
+		var temp3 = /*reverse? $(cocientesDiv).children().reverse() :*/ $(residuosDiv).children();
 		if(temp1.length == 0) return cb();
 
 		temp1.each(function (i) {
-			timeout(temp1[i], inicio,reverse);
-			timeout(temp2[i], inicio + diff,reverse);
+			timeout(temp1[i], inicio,reverse,undefined);
+			timeout(temp2[i], inicio + diff,reverse,true);
 			timeout(temp3[i], inicio + diff + diff,reverse);
-			inicio1 += diff;
+			inicio += diff;
 			if(i == temp1.length-1){
 				if(cb){
 					setTimeout(function () {
