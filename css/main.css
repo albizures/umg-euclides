@@ -1,0 +1,51 @@
+@import 'materialize.css';
+::-webkit-scrollbar-thumb:horizontal {
+  background: rgba(128,128,128,0.5);
+  border-radius: 2px;
+}
+.main {
+  padding: 20px !important;
+}
+.grid-result {
+  margin: 20px 0;
+  height: 355px;
+  overflow-x: scroll;
+}
+.grid-result ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.grid-result .row-g {
+  padding-right: 10px;
+}
+.grid-result #cocientes {
+  margin-top: 10px;
+}
+.grid-result #residuos {
+  margin-bottom: 10px;
+}
+.grid-result .cell {
+  background: #607d8b;
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+  margin: -1px 0;
+  text-align: center;
+  line-height: 100px;
+  transform: scale(0);
+  transition: all 0.5s cubic-bezier(0.56, 0, 0.49, 1);
+  transform-origin: 0 0;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15), 0px 1px 3px 0 rgba(0,0,0,0.15) !important;
+}
+.grid-result .cell:hover {
+  box-shadow: 0 5px 11px 0 rgba(0,0,0,0.15), 0px 5px 11px 0 rgba(0,0,0,0.15) !important;
+  z-index: 1;
+}
+.grid-result .cell.active {
+  transform-origin: 100% 100%;
+  background: #fff;
+  transform: scale(1);
+}
+.input-field input {
+  height: 2.5rem !important;
+}
