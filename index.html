@@ -8,6 +8,15 @@
 	<body class="orange">
 		<main class="container">
 			<div class="row">
+	    <div class="col s12 z-depth-1 card">
+	      <ul class="tabs">
+	        <li class="tab col s6 "><a class="teal-text text-lighten-2" href="#aplicacion">Aplicacion</a></li>
+	        <li class="tab col s6"><a class="active teal-text text-lighten-2" href="#documentacion">Documentacion</a></li>
+	      </ul>
+	    </div>
+
+	  	</div>
+			<div class="row" id="aplicacion">
 				<div class="col s12 z-depth-1 card main">
 					<div class="col s3 input-field">
 	          <input id="val1" value="1032" type="number">
@@ -28,6 +37,76 @@
 					<div class="col s3">
 						<h5> <strong>MCD:</strong> <span id="resultado"></span></h5>
 					</div>
+				</div>
+			</div>
+			<div id="documentacion" class="row">
+				<div class="col s12 z-depth-1 card main">
+					<h2><a id="Documentacion_de_aplicacion_Algoritmo_de_Euclides_0"></a>Documentacion de aplicacion “Algoritmo de Euclides”</h2>
+					<h3><a id="Descripcion_2"></a>Descripcion</h3>
+					<p>Este programa utiliza el algoritmo de euclides para obtener el maximo comun divisor( <strong>MCD</strong> ),pidiendo dos numeros y mostrando los cocientes, divisores y residuos ordenados y mostrando el MCD de los dos numeros ingresados.</p>
+					<p>Se utilizo Javascript como lenguaje principal, HTML para la maquetacion y CSS para el estilo. Adicionales a estos se uso Jquery para el manejo de HTML en Javascript y Materialize para el estilo.</p>
+					<blockquote>
+					<p><strong>Nota</strong>: si no esta familiarizado con Javascript revisar el final de este documento para mayor comprension, en el apartado de informacion complementaria</p>
+					</blockquote>
+					<h3><a id="Variables_utilizadas_8"></a>Variables utilizadas</h3>
+					<p>Variable <code>cocientes</code> para llevar el control de los cocientes, este se crea un espacio basio (a diferencia de divisores y residuos) para falicitar el orden.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">var</span> cocientes = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">1</span>);</code></pre>
+					<p>Variable divisores para llevar el control de los divisores optenidos.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">var</span> divisores = [];</code></pre>
+					<p>Variabe residuos para llevar el control de los residuos optenidos.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">var</span> residuos = [];</code></pre>
+					<h3><a id="Funciones_utilizadas_para_el_algoritmo_21"></a>Funciones utilizadas para el algoritmo</h3>
+					<h5><a id="calcularEvent_23"></a><code>calcular(Event)</code></h5>
+					<p>Funcion que se ejecuta con el evento de click del usuario. En esta se limpia la pantalla si en dado caso ya se haya hecho un calculo anteriormente, para limpiar se ejecuta la funcion <code>limpiar</code> que resive un callback que se ejecuta cuando se termina de limpiar la pantalla, luego se optinen los valores de los dos inputs y se convierten a numeros, se valida si la conversion no retorno NaN y que los valores no sean 0, si alguno de estos casos se cumple se termina la ejecucion de la funcion y se levanta una alerta indicando se ingreso mal los valores, por ultimo se agregan los dos valores al arreglo de divisores y se ejecuta la funcion <code>reDiv</code> que resive como parametros los valores y la funcion que va a ejecutar al terminar el calculo que es <code>fin</code>.</p>
+					<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">calcular</span>(<span class="hljs-params">evt</span>) </span>{
+	evt.preventDefault();
+	limpiar(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+	<span class="hljs-keyword">var</span> val1 = <span class="hljs-built_in">Number</span>(input1.value),
+	    val2 = <span class="hljs-built_in">Number</span>(input2.value);
+	<span><span class="hljs-keyword">if</span>(val1 === <span class="hljs-number">0</span> || val2 === <span class="hljs-number">0</span> || <span class="hljs-built_in">isNaN</span>(val1) || <span class="hljs-built_in">isNaN</span>(val2)) <span class="hljs-keyword">return</span> Materialize.toast(<span class="hljs-string">'Ingrese los dos valores'</span>, <span class="hljs-number">4000</span>);</span>		divisores.push(val1);
+		divisores.push(val2);
+		reDiv(val1,val2,fin);
+	});
+}</code></pre>
+					<h5><a id="reDivNumberNumberFunction_39"></a><code>reDiv(Number,Number,Function)</code></h5>
+					<p>Function que ejecuta el algoritmo, resive los dos valores y una funcion que se ejecutara al final, primero se saca el residuo de la division, luego se hace una division entera usando la funcion <code>Math.floor</code>  luego se grega el residuo a la arreglo de residuos y el cocientes al arreglo de cocientes, luego se verifica si el residuo el 0 y es el caso se termina la ejecucion de la funcion ejecutando la funcion pasada y mandando como parametro el divisor( este es el MCD ) , si no se agrega el residuo en el arreglo de divisores y se terminado la ejecucion de la funcion llamando recursivamente a la funcion <code>reDiv</code> pasandole como parametros el divisior, el residuo y la misma funcion.</p>
+					<pre><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reDiv</span>(<span class="hljs-params">dividendo,divisor,cb</span>) </span>{
+    <span class="hljs-keyword">var</span> residuo = dividendo % divisor;
+    <span class="hljs-keyword">var</span> cociente = <span class="hljs-built_in">Math</span>.floor(dividendo / divisor);
+
+    residuos.push(residuo);
+    cocientes.push(cociente);
+    <span class="hljs-keyword">if</span>(residuo === <span class="hljs-number">0</span> ){
+        <span class="hljs-keyword">return</span> cb(divisor);
+    }<span class="hljs-keyword">else</span>{
+        divisores.push(residuo);
+        <span class="hljs-keyword">return</span> reDiv(divisor,residuo,cb);
+    }
+}
+					</code></pre>
+					<h3><a id="Funciones_utilizadas_para_mostrar_en_pantalla_y_realizar_animaciones_56"></a>Funciones utilizadas para mostrar en pantalla y realizar animaciones</h3>
+					<blockquote>
+					<p>Estas no se explicaran al fondo, ya que solo cumplen con temas visuales.</p>
+					</blockquote>
+					<h5><a id="limpiarFunction_58"></a><code>limpiar(Function)</code></h5>
+					<p>Funcion que limpia la patanlla si anteriormente ya se ha hecho algun calculo.</p>
+					<h5><a id="finNumber_60"></a><code>fin(Number)</code></h5>
+					<p>Funcion que muestra el resultado en pantalla.</p>
+					<h5><a id="activeBooleanFunction_62"></a><code>active(Boolean,Function)</code></h5>
+					<p>Function que ejecuta las animaciones.</p>
+					<h5><a id="timeoutElementNumberBooleanNumber_64"></a><code>timeout(Element,Number,Boolean,Number)</code></h5>
+					<p>Funcion que administra los tiempos de las funciones</p>
+					<h3><a id="Informacion_complementaria_67"></a>Informacion complementaria</h3>
+					<h5><a id="Declaracion_de_arreglos_en_Javascript_68"></a>Declaracion de arreglos en Javascript</h5>
+					<p>En Javascript hay dos maneras de crear un arreglo la primera <code>new Array()</code> con ese si se le pasa un Numero como parametro se creara un arreglo con el numero de posiciones vacias que se paso, la otra forma es con <code>[]</code> se le puede inicializar con los valores que se le pasen <code>[1,2,3,4]</code>.</p>
+					<h5><a id="Callbacks_en_Javascript_70"></a>Callback’s en Javascript</h5>
+					<p>En Javascript se pueden pasar funciones como parametros para que estas se ejecuten asincronamente.</p>
+					<h4><a id="NaN_72"></a>NaN</h4>
+					<p>Significa Not a Number que es el resultado de intentar parsear u String a un Number</p>
+					<h4><a id="_y__74"></a>== y ===</h4>
+					<p>En javascript hay dos maneras de comparar valores la primera con doble igual que valida si los valores son semejantes <code>'1' == 1</code> y el segundo que valida si los valores son exactamente iguales  <code>'1' === 1</code>  el primero retornaria true y el segundo false.</p>
+
+
 				</div>
 			</div>
 		</main>

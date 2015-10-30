@@ -1,13 +1,72 @@
-@import 'materialize.css'
+@require 'documentacion.css'
+@require 'materialize.css'
 @import 'scrollbar'
+
 
 appear(size)
 	transform: scale(size);
 
+.tabs .indicator
+	background-color: #2bbbad !important
+
+body
+	position absolute
+	width 100%
+	height 100%
+	overflow hidden
+code
+	span
+		white-space: nowrap;
+
+#documentacion
+	.card.main
+		overflow auto
+		max-height 550px
 size-cell = 100px;
 grid-height = size-cell * 3;
 .main
 	padding 20px !important
+h1 {
+	line-height: 3rem;
+	font-size: 2.0571429rem;
+	margin-bottom: .21999rem;
+	padding-top: .78001rem
+}
+
+h2 {
+	font-size: 1.953125rem;
+	margin-bottom: .1835837rem;
+	padding-top: .8164163rem
+}
+
+h2,
+h3 {
+	line-height: 3rem
+}
+
+h3 {
+	font-size: 1.6457143rem;
+	margin-bottom: .07599rem;
+	padding-top: .92401rem
+}
+
+h4 {
+	font-size: 1.5625rem;
+	margin-bottom: .546865rem;
+	padding-top: .453135rem
+}
+
+h5 {
+	font-size: 1.25rem;
+	margin-bottom: -.56251rem;
+	padding-top: .56251rem
+}
+
+h6 {
+	font-size: 1rem;
+	margin-bottom: -.65001rem;
+	padding-top: .65001rem
+}
 .grid-result
 	margin 20px 0
 	height 355px
